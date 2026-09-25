@@ -1,0 +1,46 @@
+# Install editable only (pip install -e .): weights/ and mycpp/build/ are
+# resolved relative to the source files, so a site-packages copy won't find them.
+#
+# Not listed because they need a CUDA toolchain and --no-build-isolation;
+# install these first:
+#   pip install torch torchvision --index-url https://download.pytorch.org/whl/cu124
+#   pip install --no-build-isolation git+https://github.com/facebookresearch/pytorch3d.git
+#   pip install --no-build-isolation git+https://github.com/NVlabs/nvdiffrast.git
+[build-system]
+requires = ["setuptools>=64"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "foundationpose"
+version = "0.1.0"
+requires-python = ">=3.10"
+dependencies = [
+  "numpy>=2",
+  "scipy",
+  "scikit-learn",
+  "scikit-image",
+  "h5py",
+  "joblib",
+  "PyYAML>=6",
+  "ruamel.yaml>=0.18",
+  "opencv-python",
+  "imageio",
+  "open3d",
+  "trimesh",
+  "transformations",
+  "matplotlib",
+  "pandas",
+  "Pillow",
+  "kornia>=0.7",
+  "omegaconf>=2.3",
+  "psutil",
+  "tqdm",
+  "warp-lang",
+]
+
+[tool.setuptools]
+py-modules = ["estimater", "Utils", "datareader"]
+
+[tool.setuptools.packages.find]
+include = ["learning*"]
+namespaces = true
